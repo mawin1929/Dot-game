@@ -1,0 +1,8 @@
+#circle{
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at 40px 50px, #fff908, #000);
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}

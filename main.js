@@ -3,26 +3,29 @@
  */
 main();
 
-
-
 function main() {
     // drawPlayer();
     movable();
-    
+
 }
 function movable(){
     $(document).ready(function(){
-        $('#canvas').mousedown(function(e){
+        $('#canvas').mousedown(function(move){
             var offset = $(this).offset();
             $('#circle').animate({
-                'top': e.pageY-offset.top,
-                'left': e.pageX-offset.left
+                'top': move.pageY-offset.top -19,
+                'left': move.pageX-offset.left +6
             },180);
         })
     })
-
-
 }
+// function getPositions(circle) {
+//     var $circle = $(circle);
+//     var pos = $circle.position();
+//     var width = $circle.width();
+//     var height = $circle.height();
+//     return [ [ circle.left, circle.left + width ], [ circle.top, circle.top + height ] ];
+// }
 
 // function drawPlayer() {
 //     var canvas = document.getElementById("canvas");

@@ -1,13 +1,32 @@
+#canvas-wrap{
+    position:relative;
+}
+
 #canvas{
-    background: linear-gradient(10deg, #000000, rgba(0, 0, 0, 0.48));
+    background: radial-gradient(#67655e, rgb(0, 0, 0));
     width: 1000px;
     border-style: ridge;
     height: 500px;
-    position:relative;
+    position:absolute;
     left:30px;
 }
 
+#dot {
+
+    background-color:red;
+    border-radius: 50%;
+    left:250px;
+    width:40px;
+    height:40px;
+    position:absolute;
+    margin:5px;
+}
+
+
 #circle{
+    left:100px;
+    top: 100px;
+    /*Temp fix*/
     width: 60px;
     height: 60px;
     background: radial-gradient(circle at 50% 120%, #fff908, #ffee2a 10%, #b1a61e 80%, #454011 100%);
@@ -16,6 +35,7 @@
     -webkit-border-radius: 50px;
     border-radius: 50px;
     position:absolute;
+    z-index:10;
 }
 
 #circle:before {
@@ -28,5 +48,5 @@
     border-radius: 50%;
     background: radial-gradient(circle at 50% 0px, #ffffff, rgba(255, 255, 255, 0) 58%);
     filter: blur(5px);
-    z-index: 2;
 }
+

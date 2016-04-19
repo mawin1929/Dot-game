@@ -16,7 +16,7 @@ function movable(){
             $('#circle').animate({ //Animate via offset
                 'top': move.pageY-offset.top -19,
                 'left': move.pageX-offset.left +6
-            },180,checkCollisions); //call checkCollision function
+            },175,checkCollisions); //call checkCollision function
         });
     })
 }
@@ -44,7 +44,10 @@ function checkCollisions(){
 
     if (match){  //Once dot is touched...
         click++;
+        $(this).animate({opacity:'.5'},3);
+        $(this).animate({opacity:'1.0'},"fast");
         $(this).text(click);
+
         move();
         color();
         var clone = $("#dot").clone(); //Not sure how to do this yet...
@@ -63,7 +66,6 @@ function color(){
     $("#dot").css('background-color',random);
 
 }
-
 
 
 

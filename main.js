@@ -2,13 +2,40 @@
  * Created by Michael Win on 4/11/2016.
  */
 var click = 0; //Counter
-var colors =['green','blue','red','aqua','chocolate']; //Array of possible colors
+var colors =['#2ECC40','#0074D9','#85144b','#39CCCC','#FF851B','#001f3f']; //Array of possible colors
 main(); //Calls Main function
+// var circle= document.getElementById('circle'),
+//             left = circle.offsetLeft,
+//             shadows=[],
+//             delta = 2;
+//
+// setInterval(fly,10);
+
+function fly() {
+    var shadow = circle.cloneNode();
+    shadow.classList.add('shadow');
+    shadow.style.backgroundColor = 'silver';
+    document.body.appendChild(shadow);
+    setTimeout(function () {
+        shadow.style.backgroundColor = 'white';
+    }, 5);
+
+    shadows.push(shadow);
+    if (shadows.length > 10) {
+        shadows[0].parentNode.removeChild(shadows[0]);
+        shadows.shift();
+    }
+//     if(left+delta > document.body.offsetWidth-circle.offsetWidth || left < 0) {
+//         delta= -delta;
+//     }
+//     left+= delta;
+//     circle.style.left = left + 'px';
+// }
+}
+
 
 function main() {
-    // drawPlayer();
-    // $('#circle'').animate({ boxShadow : "1px 2px 1223200px #ffff73;" });
-
+    $("#dot").css('background-color','yellow');
     movable();
 }
 function movable(){
@@ -22,19 +49,6 @@ function movable(){
         });
     })
 }
-function getPositions(sphere) {
-    var $sphere = $(sphere);
-    var pos = $sphere.position();
-    var width = $sphere.width();
-    var height = $sphere.height();
-    return [[pos.left, pos.left + width], [pos.top, pos.top + height]];  //Grabs perimeter
-}
-function comparePositions(p1, p2) {
-    var x1 = p1[0] < p2[0] ? p1 : p2;
-    var x2 = p1[0] < p2[0] ? p2 : p1;
-    return !!(x1[1] > x2[0] || x1[0] === x2[0]);  //Simplified thanks to IDE
-}
-// dont touch this one ^^^^^^^^
 function checkCollisions(){
     var sphere = $("#dot")[0];
     var pos = getPositions(sphere);
@@ -48,15 +62,34 @@ function checkCollisions(){
         click++;
         $(this).animate({opacity:'.5'},3);
         $(this).animate({opacity:'1.0'},"fast");
-        $(this).text(click);
-
-
+        $(this).text(click*5);
+        if (click%4==0){
+            var newElement = $('#dot').eq(0).clone();
+            newElement.appendTo("body");
+            newElement.css('left',Math.floor((Math.random() * 950) + 30));
+            newElement.css('top',Math.floor((Math.random() * 480) + 30));
+        }
         move();
         color();
         var clone = $("#dot").clone(); //Not sure how to do this yet...
-        // $("#dot").fadeTo(150,0.0,function(){});
-        // $("#dot").remove(); Maybe not remove, but place somewhere else?
     }
+
+
+
+function getPositions(sphere) {
+    var $sphere = $(sphere);
+    var pos = $sphere.position();
+    var width = $sphere.width();
+    var height = $sphere.height();
+    return [[pos.left, pos.left + width], [pos.top, pos.top + height]];  //Grabs perimeter
+}
+function comparePositions(p1, p2) {
+    var x1 = p1[0] < p2[0] ? p1 : p2;
+    var x2 = p1[0] < p2[0] ? p2 : p1;
+    return !!(x1[1] > x2[0] || x1[0] === x2[0]);  //Simplified thanks to IDE
+}
+// dont touch this one ^^^^^^^^
+
 }
 function move(){
     $("#dot").css('left',Math.floor((Math.random() * 950) + 30)); //will need to ignore previous position.
@@ -69,32 +102,6 @@ function color(){
     $("#dot").css('background-color',random);
 
 }
-
-
-
-// function getPositions(circle) {
-//     var $circle = $(circle);
-//     var pos = $circle.position();
-//     var width = $circle.width();
-//     var height = $circle.height();
-//     return [ [ circle.left, circle.left + width ], [ circle.top, circle.top + height ] ];
-// }
-
-// function drawPlayer() {
-//     var canvas = document.getElementById("canvas");
-//     var ctx = canvas.getContext("2d");
-//     ctx.beginPath();
-//     ctx.arc(100,75,50,0,2*Math.PI);
-//     ctx.stroke();
-//     ctx.fillStyle = "#FF0000";
-//     ctx.fill();
-//     ctx.lineWidth = 3;
-//     ctx.strokeStyle = '#003300';
-//     ctx.stroke();
-// }
-
-
-
 
 
 

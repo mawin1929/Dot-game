@@ -7,6 +7,8 @@ main(); //Calls Main function
 
 function main() {
     // drawPlayer();
+    // $('#circle'').animate({ boxShadow : "1px 2px 1223200px #ffff73;" });
+
     movable();
 }
 function movable(){
@@ -14,8 +16,8 @@ function movable(){
         $('#canvas').mousedown(function(move){
             var offset = $(this).offset();  //On mousedown grab offset
             $('#circle').animate({ //Animate via offset
-                'top': move.pageY-offset.top -19,
-                'left': move.pageX-offset.left +6
+                'top': move.pageY-offset.top -25,
+                'left': move.pageX-offset.left -25
             },175,checkCollisions); //call checkCollision function
         });
     })
@@ -48,6 +50,7 @@ function checkCollisions(){
         $(this).animate({opacity:'1.0'},"fast");
         $(this).text(click);
 
+
         move();
         color();
         var clone = $("#dot").clone(); //Not sure how to do this yet...
@@ -57,12 +60,12 @@ function checkCollisions(){
 }
 function move(){
     $("#dot").css('left',Math.floor((Math.random() * 950) + 30)); //will need to ignore previous position.
-    $("#dot").css('top',Math.floor((Math.random() * 400) + 30));
+    $("#dot").css('top',Math.floor((Math.random() * 480) + 30));
     // $("#dot").css('background-color','green'); //Will need ro randomize
 }
 
 function color(){
- var random = colors[Math.floor(Math.random() * colors.length)]; //color array
+    var random = colors[Math.floor(Math.random() * colors.length)]; //color array
     $("#dot").css('background-color',random);
 
 }
@@ -89,6 +92,7 @@ function color(){
 //     ctx.strokeStyle = '#003300';
 //     ctx.stroke();
 // }
+
 
 
 

@@ -5,15 +5,16 @@
 #canvas-wrap{
     position:relative;
 }
-
 #canvas{
     background: radial-gradient(#67655e, rgb(0, 0, 0));
-    width: 1000px;
-    border-style: ridge;
-    height: 500px;
+    height:575px;
+    width: 100%;
+    overflow: hidden;
+    /*border-style: ridge;*/
     position:absolute;
-    left:30px;
 }
+
+
 
 #dot {
 
@@ -32,7 +33,10 @@
 }
 
 
+
+
 #circle{
+    box-shadow: 1px 1px 100px 10px #ffef73;
     left:100px;
     top: 100px;
     /*Temp fix*/
@@ -60,4 +64,5 @@
     background: radial-gradient(circle at 50% 0px, #e6e6e6, rgba(255, 255, 255, 0) 58%);
     filter: blur(5px);
 }
+
 

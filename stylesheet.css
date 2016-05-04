@@ -18,27 +18,76 @@
 
 #dot {
 
-    background:red;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
-    left:250px;
+    left:50%;
+    bottom:20%;
     width:40px;
     height:40px;
     position:absolute;
     margin:5px;
     pointer-events: none;
     background: radial-gradient(circle at 50% 0px, #ececec, rgba(255, 255, 255, 0) 58%);
-
+    -webkit-animation: bubble-anim 2s ease-out infinite;
+    animation: bubble-anim 2s ease-out infinite;
 }
 
+@-webkit-keyframes bubble-anim {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1); }
+
+    20% {
+        -webkit-transform: scaleY(0.95) scaleX(1.05);
+        transform: scaleY(0.95) scaleX(1.05); }
+
+    48% {
+        -webkit-transform: scaleY(1.1) scaleX(0.9);
+        transform: scaleY(1.1) scaleX(0.9); }
+
+    68% {
+        -webkit-transform: scaleY(0.98) scaleX(1.02);
+        transform: scaleY(0.98) scaleX(1.02); }
+
+    80% {
+        -webkit-transform: scaleY(1.02) scaleX(0.98);
+        transform: scaleY(1.02) scaleX(0.98); }
+
+    97%, 100% {
+        -webkit-transform: scale(1);
+        transform: scale(1); } }
+@keyframes bubble-anim {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1); }
+
+    20% {
+        -webkit-transform: scaleY(0.95) scaleX(1.05);
+        transform: scaleY(0.95) scaleX(1.05); }
+
+    48% {
+        -webkit-transform: scaleY(1.1) scaleX(0.9);
+        transform: scaleY(1.1) scaleX(0.9); }
+
+    68% {
+        -webkit-transform: scaleY(0.98) scaleX(1.02);
+        transform: scaleY(0.98) scaleX(1.02); }
+
+    80% {
+        -webkit-transform: scaleY(1.02) scaleX(0.98);
+        transform: scaleY(1.02) scaleX(0.98); }
+
+    97%, 100% {
+        -webkit-transform: scale(1);
+        transform: scale(1); }}
 
 
 
 #circle{
     box-shadow: 1px 1px 100px 10px #ffef73;
-    left:100px;
-    top: 100px;
+    left:48%;
+    top: 250px;
     /*Temp fix*/
     width: 60px;
     height: 60px;

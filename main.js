@@ -2,19 +2,27 @@
  * Created by Michael Win on 4/11/2016.
  */
 
+
+AudioFX=function(){var f="0.4.0";var c=false,e=document.createElement("audio"),a=function(j){var i=e.canPlayType(j);return(i==="probably")||(i==="maybe")};if(e&&e.canPlayType){c={ogg:a('audio/ogg; codecs="vorbis"'),mp3:a("audio/mpeg;"),m4a:a("audio/x-m4a;")||a("audio/aac;"),wav:a('audio/wav; codecs="1"'),loop:(typeof e.loop==="boolean")}}var d=function(m,i,l){var k=document.createElement("audio");if(l){var j=function(){k.removeEventListener("canplay",j,false);l()};k.addEventListener("canplay",j,false)}if(i.loop&&!c.loop){k.addEventListener("ended",function(){k.currentTime=0;k.play()},false)}k.volume=i.volume||0.1;k.autoplay=i.autoplay;k.loop=i.loop;k.src=m;return k};var h=function(i){for(var j=0;j<i.length;j++){if(c&&c[i[j]]){return i[j]}}};var g=function(i){var k,j;for(k=0;k<i.length;k++){j=i[k];if(j.paused||j.ended){return j}}};var b=function(o,j,m){j=j||{};var i=j.formats||[],l=h(i),k=[];o=o+(l?"."+l:"");if(c){for(var p=0;p<(j.pool||1);p++){k.push(d(o,j,p==0?m:null))}}else{m()}return{audio:(k.length==1?k[0]:k),play:function(){var n=g(k);if(n){n.play()}},stop:function(){var r,q;for(r=0;r<k.length;r++){q=k[r];q.pause();q.currentTime=0}}}};b.version=f;b.supported=c;return b}();
+
+
 var click = 0; //Counter
+
+var beep = AudioFX('TestSound', {formats: ['wav'], pool: 10 }); //Sound :)))
 var newElement = $('#dot').eq(0).clone();
-newElement.css('background-color','#85144b');
-var colors =['#2ECC40','#0074D9','#85144b','#39CCCC','#FF851B','#001f3f']; //Array of possible colors
+        newElement.css('background-color','#85144b');
+        var colors =['#2ECC40','#0074D9','#F4D03F','#FF851B','#D2527F']; //Array of possible colors
+var globalran = '#ffee2a';
 main();
+
 
 function matchy(){
     click++;
+    $("#text").empty();
     $("#circle").animate({opacity:'.5'},3);
     $("#circle").animate({opacity:'1.0'},"fast");
     $("#circle").text(click*2);
 }
-
 
 
 function fly() {
@@ -34,9 +42,14 @@ function fly() {
 }
 
 function main() {
-    $("#dot").css('background-color','yellow');
-
+    $("#dot").css('background-color','#ffee2a ');
+    $("#text").animate({top:'-=150px'}, 2500);
     movable();
+
+
+}
+function sound(){
+    beep.play();
 }
 function movable(){
     $(document).ready(function(){
@@ -59,6 +72,12 @@ function checkCollisions(){
     var verticalMatch = comparePositions(pos[1], pos2[1]);
     var match = horizontalMatch && verticalMatch;
     if (match){  //Once dot is touched...
+        sound();
+        $("#circle").css({
+            background: "-webkit-gradient(linear, left top, left bottom, from("+globalran+"), to("+globalran+"))"
+        });
+        beep.play();
+        $("#circle").css('box-shadow', '1px 1px 100px 10px '+globalran+'');
         matchy();
         if (click%4==0){
             newElement.appendTo("body");
@@ -94,13 +113,19 @@ function move(){
 function color(){
     var random = colors[Math.floor(Math.random() * colors.length)]; //color array
     $("#dot").css('background-color',random);
-
-
+    globalran = random;
+    // $("#circle").css({
+    //     background: "-webkit-gradient(linear, left top, left bottom, from("+random+"), to("+random+"))"
+    // });
 }
 
 function color2(){
     var random = colors[Math.floor(Math.random() * colors.length)]; //color array
     newElement.css('background-color',random);
+    globalran = random;
+    // $("#circle").css({
+    //     background: "-webkit-gradient(linear, left top, left bottom, from("+random+"), to("+random+"))"
+    // });
 
 }
 
@@ -113,6 +138,11 @@ function checkCollisions2() {
     var verticalMatch = comparePositions2(pos[1], pos2[1]);
     var match = horizontalMatch && verticalMatch;
     if(match){
+        $("#circle").css({
+            background: "-webkit-gradient(linear, left top, left bottom, from("+globalran+"), to("+globalran+"))"
+        });
+        beep.play();
+        $("#circle").css('box-shadow', '1px 1px 100px 10px '+globalran+'');
         matchy();
         newElement.css('left',Math.floor((Math.random() * 950) + 30));
         newElement.css('top',Math.floor((Math.random() * 480) + 30));

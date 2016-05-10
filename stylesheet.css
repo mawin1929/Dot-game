@@ -15,6 +15,61 @@
 }
 
 
+#text{
+    position: absolute;
+    left: 42%;
+    z-index:100;
+    top: 185px;
+    font-size: 100px;
+    width:200px; height:200px;
+    color: #d7c763;
+    pointer-events:none;
+    text-shadow: 0 1px 0 #565656,
+    0 2px 0 #4c4f4d,
+    0 3px 0 #bbb,
+    0 4px 0 #b9b9b9,
+    0 5px 0 #aaa,
+    0 6px 1px rgba(0,0,0,.1),
+    0 0 5px rgba(0,0,0,.1),
+    0 1px 3px rgba(0,0,0,.3),
+    0 3px 5px rgba(0,0,0,.2),
+    0 5px 10px rgba(0,0,0,.25),
+    0 10px 10px rgba(0,0,0,.2),
+    0 20px 20px rgba(0,0,0,.15);
+    -webkit-animation: blur 2s, fadein 4s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: blur 2s, fadein 4s; /* Firefox < 16 */
+    -o-animation: blur 2s, fadein 4s; /* Opera < 12.1 */
+    animation: blur 2s, fadein 4s;
+}
+
+@-webkit-keyframes blur {
+    0%, 100%  { -webkit-filter: blur(0px); }
+    50% { -webkit-filter: blur(10px); }
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
 
 #dot {
 

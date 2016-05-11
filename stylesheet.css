@@ -17,7 +17,7 @@
 
 #text{
     position: absolute;
-    left: 42%;
+    left: 39%;
     z-index:100;
     top: 185px;
     font-size: 100px;
@@ -76,16 +76,17 @@
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
-    left:50%;
-    bottom:20%;
-    width:40px;
-    height:40px;
-    position:absolute;
-    margin:5px;
+    left: 50%;
+    bottom: 20%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    margin: 5px;
     pointer-events: none;
     background: radial-gradient(circle at 50% 0px, #ececec, rgba(255, 255, 255, 0) 58%);
     -webkit-animation: bubble-anim 2s ease-out infinite;
     animation: bubble-anim 2s ease-out infinite;
+
 }
 
 @-webkit-keyframes bubble-anim {
@@ -155,7 +156,48 @@
     z-index:10;
     font: normal 20px Verdana, Arial, sans-serif;
     text-align:center;
+    -webkit-animation: my-anim 4s  ease-out infinite;
+    animation: my-anim 4s  ease-out infinite;
 }
+
+@-webkit-keyframes my-anim {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1); }
+
+    20% {
+        -webkit-transform: scale(1.07);
+        -ms-transform: scale(1.07);
+        transform: scale(1.07);}
+
+    60% {
+        -webkit-transform: scale(0.96);
+        transform: scale(0.96);}
+
+
+    97%, 100% {
+        -webkit-transform: scale(1);
+        transform: scale(1); }
+}
+@keyframes my-anim {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1); }
+
+    20% {
+        -webkit-transform: scale(1.07);
+        -ms-transform: scale(1.07);
+        transform: scale(1.07);}
+
+    60% {
+        -webkit-transform: scale(0.96);
+        transform: scale(0.96);}
+
+    97%, 100% {
+        -webkit-transform: scale(1);
+        transform: scale(1); }}
+
+
 
 #circle:before {
     content: "";

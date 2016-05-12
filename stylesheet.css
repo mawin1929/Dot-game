@@ -6,7 +6,15 @@
     position:relative;
 }
 #canvas{
-    background: radial-gradient(#67655e, rgb(0, 0, 0));
+    /*background: radial-gradient(#67655e, rgb(0, 0, 0));*/
+
+    background-image: url("b2.svg");
+    /*-webkit-animation: backgroundScroll 20s linear infinite;*/
+    /*animation: backgroundScroll 20s linear infinite;*/
+    /*background: #2BC0E4; !* fallback for old browsers *!*/
+    /*background: -webkit-linear-gradient(to left, #2BC0E4 , #EAECC6); !* Chrome 10-25, Safari 5.1-6 *!*/
+    /*background: linear-gradient(to left, #2BC0E4 , #EAECC6); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+
     height:575px;
     width: 100%;
     overflow: hidden;
@@ -14,6 +22,15 @@
     position:absolute;
 }
 
+/*@-webkit-keyframes backgroundScroll {*/
+    /*from {background-position: 0 0;}*/
+    /*to {background-position: -400px 0;}*/
+/*}*/
+
+/*@keyframes backgroundScroll {*/
+    /*from {background-position: 0 0;}*/
+    /*to {background-position: -400px 0;}*/
+/*}*/
 
 #text{
     position: absolute;
@@ -71,8 +88,28 @@
 }
 
 
-#dot {
 
+#trail {
+    box-shadow: 1px 1px 100px 10px #ffef73;
+    left:47%;
+    top: 250px;
+    /*Temp fix*/
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle at 50% 120%, #fff908, #ffee2a 10%, #b1a61e 80%, #454011 100%);
+    opacity:1.0;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    position:absolute;
+    z-index:10;
+    font: normal 20px Verdana, Arial, sans-serif;
+    text-align:center;
+    -webkit-animation: my-anim 4s  ease-out infinite;
+    animation: my-anim 4s  ease-out infinite;
+}
+
+#dot {
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
@@ -137,7 +174,6 @@
     97%, 100% {
         -webkit-transform: scale(1);
         transform: scale(1); }}
-
 
 
 #circle{

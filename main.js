@@ -4,17 +4,25 @@
 
 
 AudioFX=function(){var f="0.4.0";var c=false,e=document.createElement("audio"),a=function(j){var i=e.canPlayType(j);return(i==="probably")||(i==="maybe")};if(e&&e.canPlayType){c={ogg:a('audio/ogg; codecs="vorbis"'),mp3:a("audio/mpeg;"),m4a:a("audio/x-m4a;")||a("audio/aac;"),wav:a('audio/wav; codecs="1"'),loop:(typeof e.loop==="boolean")}}var d=function(m,i,l){var k=document.createElement("audio");if(l){var j=function(){k.removeEventListener("canplay",j,false);l()};k.addEventListener("canplay",j,false)}if(i.loop&&!c.loop){k.addEventListener("ended",function(){k.currentTime=0;k.play()},false)}k.volume=i.volume||0.1;k.autoplay=i.autoplay;k.loop=i.loop;k.src=m;return k};var h=function(i){for(var j=0;j<i.length;j++){if(c&&c[i[j]]){return i[j]}}};var g=function(i){var k,j;for(k=0;k<i.length;k++){j=i[k];if(j.paused||j.ended){return j}}};var b=function(o,j,m){j=j||{};var i=j.formats||[],l=h(i),k=[];o=o+(l?"."+l:"");if(c){for(var p=0;p<(j.pool||1);p++){k.push(d(o,j,p==0?m:null))}}else{m()}return{audio:(k.length==1?k[0]:k),play:function(){var n=g(k);if(n){n.play()}},stop:function(){var r,q;for(r=0;r<k.length;r++){q=k[r];q.pause();q.currentTime=0}}}};b.version=f;b.supported=c;return b}();
-
-
+//Load in AudioFx lib
+var clear;
 var click = 0; //Counter
-
+var circly = document.getElementById('circle');
+var shadows= [];
 var beep = AudioFX('TestSound', {formats: ['wav'], pool: 10 }); //Sound :)))
 var newElement = $('#dot').eq(0).clone();
-        newElement.css('background-color','#85144b');
-        var colors =['#2ECC40','#0074D9','#F4D03F','#FF851B','#D2527F']; //Array of possible colors
+newElement.css('background-color','#85144b');
+var colors =['#2ECC40','#0074D9','#F4D03F','#FF851B','#D2527F']; //Array of possible colors
 var globalran = '#ffee2a';
 main();
 
+function main() {
+    $("#dot").css('background-color','#ffee2a ');
+    $("#text").animate({top:'-=150px'}, 2500);
+    movable();
+
+
+}
 
 function matchy(){
     click++;
@@ -26,28 +34,24 @@ function matchy(){
 
 
 function fly() {
-    var shadow = circle.cloneNode();
+    var shadow = circly.cloneNode();
+    shadow.id = "trail";
     shadow.classList.add('shadow');
-    shadow.style.backgroundColor = 'silver';
     document.body.appendChild(shadow);
-    setTimeout(function () {
-        shadow.style.backgroundColor = 'white';
-    }, 5);
-
     shadows.push(shadow);
-    if (shadows.length > 10) {
+    if (shadows.length > 15) {
         shadows[0].parentNode.removeChild(shadows[0]);
         shadows.shift();
     }
 }
 
-function main() {
-    $("#dot").css('background-color','#ffee2a ');
-    $("#text").animate({top:'-=150px'}, 2500);
-    movable();
-
-
+function clearfly(){
+    if (shadows.length > 0) {
+        shadows[0].parentNode.removeChild(shadows[0]);
+        shadows.shift();
+    }
 }
+
 function sound(){
     beep.play();
 }
@@ -59,6 +63,14 @@ function movable(){
                 'top': move.pageY-offset.top -25,
                 'left': move.pageX-offset.left -25
             },175,checkCollisions); //call checkCollision function
+            clearInterval(clear);
+           trail = setInterval(fly, 5);
+        });
+        $('#canvas').mouseup(function(){
+            clearInterval(trail);
+            clear = setInterval(clearfly,10);
+
+            // shadows[0].parentNode.removeChild(shadows[0]);
         });
     })
 }

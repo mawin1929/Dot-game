@@ -2,6 +2,21 @@
 
 /*}*/
 
+
+#modal {
+
+    height:     100%;
+    width:      100%;
+    background-color:red;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+
+
 #canvas-wrap{
     position:relative;
 }

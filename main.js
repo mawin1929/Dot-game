@@ -72,6 +72,10 @@ function movable(){
                 'top': move.pageY-offset.top -25,
                 'left': move.pageX-offset.left -25
             },175,checkCollisions); //call checkCollision function
+        $('#flashlight').animate({
+            'top': move.pageY-offset.top -148, //higher the number highr flashlight raises
+            'left': move.pageX-offset.left -148
+        },175);
             clearInterval(clear);
             trail = setInterval(fly, 5);
         }).mouseup(function(){
@@ -82,9 +86,9 @@ function movable(){
 
         });
 }
+
 function stillDown(){
     if (mousestilldown) {
-    console.log("god save the queen");
         clearInterval(trail);
     }
 }
@@ -104,6 +108,7 @@ function checkCollisions(){
         });
         beep.play();
         $("#circle").css('box-shadow', '1px 1px 100px 10px '+globalran+'');
+        $("#flashlight").css('background-color', ''+globalran+'');
         matchy();
         if (click%4==0){
             newElement.appendTo("body");
@@ -125,7 +130,7 @@ function getPositions(sphere) {
 function comparePositions(p1, p2) {
     var x1 = p1[0] < p2[0] ? p1 : p2;
     var x2 = p1[0] < p2[0] ? p2 : p1;
-    return !!(x1[1] > x2[0] || x1[0] === x2[0]);  //Simplified thanks to IDE
+    return !!(x1[1] > x2[0] || x1[0] === x2[0]);  //The IDE wanted me to simplify it so OK
 }
 // dont touch this one ^^^^^^^^
 }
@@ -139,12 +144,14 @@ function move(){
 function color(){
     var random = colors[Math.floor(Math.random() * colors.length)]; //color array
     $("#dot").css('background-color',random);
+    $("#canvas").css('background-color',random);
     globalran = random;
 }
 
 function color2(){
     var random = colors[Math.floor(Math.random() * colors.length)]; //color array
     newElement.css('background-color',random);
+    $("#canvas").css('background-color',random);
     globalran = random;
 
 
@@ -163,6 +170,7 @@ function checkCollisions2() {
         });
         beep.play();
         $("#circle").css('box-shadow', '1px 1px 100px 10px '+globalran+'');
+        $("#flashlight").css('background-color', ''+globalran+'');
         matchy();
         newElement.css('left',Math.floor((Math.random() * 950) + 30));
         newElement.css('top',Math.floor((Math.random() * 480) + 30));

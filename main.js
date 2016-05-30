@@ -141,21 +141,25 @@ function move(){
     // $("#dot").css('background-color','green'); //Will need ro randomize
 }
 
-function color(){
+function color() {
     var random = colors[Math.floor(Math.random() * colors.length)]; //color array
-    $("#dot").css('background-color',random);
-    $("#canvas").css('background-color',random);
+    while(globalran == random){
+        random = colors[Math.floor(Math.random() * colors.length)];
+    }
     globalran = random;
+    newElement.css('background-color', globalran);
+    $("#canvas").css('background-color', globalran);
+    $("#dot").css('background-color', globalran);
 }
-
-function color2(){
-    var random = colors[Math.floor(Math.random() * colors.length)]; //color array
-    newElement.css('background-color',random);
-    $("#canvas").css('background-color',random);
-    globalran = random;
-
-
-}
+// function color2(){
+//     var random = colors[Math.floor(Math.random() * colors.length)]; //color array
+//     globalran = random;
+//     newElement.css('background-color',globalran);
+//     $("#canvas").css('background-color',globalran);
+//     $("#dot").css('background-color',globalran);
+//
+//
+// }
 
 function checkCollisions2() {
     var pos = getPositions2(newElement);
@@ -174,7 +178,7 @@ function checkCollisions2() {
         matchy();
         newElement.css('left',Math.floor((Math.random() * 950) + 30));
         newElement.css('top',Math.floor((Math.random() * 480) + 30));
-        color2();
+        color();
 
     }
 }

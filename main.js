@@ -11,6 +11,7 @@ AudioFX=function(){var f="0.4.0";var c=false,e=document.createElement("audio"),a
 var clear;
 var mousestilldown= false;
 var click = 0; //Counter
+var introClick = 0;
 var circly = document.getElementById('circle');
 var shadows= [];
 var beep = AudioFX('TestSound', {formats: ['wav'], pool: 10 }); //Sound :)))
@@ -18,16 +19,22 @@ var newElement = $('#dot').eq(0).clone();
 newElement.css('background-color','#85144b');
 var colors =['#2ECC40','#0074D9','#F4D03F','#FF851B','#D2527F']; //Array of possible colors
 var globalran = '#ffee2a';
-
 var start = AudioFX('start', {formats:['wav']});
-// $("#loading").text("Loading...");
+$( "#circle" ).fadeTo("fast",0);
+$( "#flashlight" ).fadeTo("fast",0);
+$("#dot").fadeTo("fast",0);
+
+
+// $( "#flashlightOverlay").fadeTo("fast",0);
 main();
+
+
 
 function main() {
     $("#dot").css('background-color','#ffee2a ');
     $("#text").animate({top:'-=150px'}, 2500);
     movable();
-    setInterval(stillDown,100);
+    // setInterval(stillDown,100);
 
 }
 
@@ -67,22 +74,35 @@ function sound2(){
 function movable(){
     $('#canvas').mousedown(function(move){
             mousestilldown= true;
+        if(introClick == 0){
+            console.log("spaghetti fam");
+            $( "#circle" ).fadeTo("fast",1);
+            $("#flashlightOverlay").remove();
+            // $( "#flashlightOverlay").fadeTo("fast",1);
+            $( "#flashlight" ).fadeTo("fast",0.6);
+            $("#dot").fadeTo("fast",1);
+            introClick++;
+        }
             var offset = $(this).offset();  //On down grab offset
             $('#circle').animate({ //Animate via offset
                 'top': move.pageY-offset.top -25,
                 'left': move.pageX-offset.left -25
             },175,checkCollisions); //call checkCollision function
         $('#flashlight').animate({
-            'top': move.pageY-offset.top -148, //higher the number highr flashlight raises
-            'left': move.pageX-offset.left -148
+            'top': move.pageY-offset.top -128, //positive the number higher flashlight raises
+            'left': move.pageX-offset.left -135 //more negative the flashlight goes left
         },175);
-            clearInterval(clear);
-            trail = setInterval(fly, 5);
-        }).mouseup(function(){
-        console.log("is mouse up");
-            clearInterval(trail);
-            clear = setInterval(clearfly,5);
-            mousestilldown = false;
+        // $('#flashlightOverlay').animate({
+        //     'top': move.pageY-offset.top -148, //higher the number higher flashlight raises
+        //     'left': move.pageX-offset.left -148
+        // },175);
+        //     clearInterval(clear);
+        //     trail = setInterval(fly, 5);
+        // }).mouseup(function(){
+        // console.log("is mouse up");
+        //     clearInterval(trail);
+        //     clear = setInterval(clearfly,5);
+        //     mousestilldown = false;
 
         });
 }
@@ -93,6 +113,7 @@ function stillDown(){
     }
 }
 function checkCollisions(){
+    checkFlashCollision();
     checkCollisions2();
     var sphere = $("#dot")[0];
     var pos = getPositions(sphere);
@@ -115,10 +136,15 @@ function checkCollisions(){
             newElement.css('left',Math.floor((Math.random() * 950) + 30));
             newElement.css('top',Math.floor((Math.random() * 480) + 30));
         }
+        $("#dot").css('z-index', -1);
         move();
         color();
         var clone = $("#dot").clone(); //Not sure how to do this yet...
     }
+
+
+}
+
 
 function getPositions(sphere) {
     var $sphere = $(sphere);
@@ -133,7 +159,6 @@ function comparePositions(p1, p2) {
     return !!(x1[1] > x2[0] || x1[0] === x2[0]);  //The IDE wanted me to simplify it so OK
 }
 // dont touch this one ^^^^^^^^
-}
 
 function move(){
     $("#dot").css('left',Math.floor((Math.random() * 950) + 30)); //will need to ignore previous position.
@@ -148,7 +173,7 @@ function color() {
     }
     globalran = random;
     newElement.css('background-color', globalran);
-    $("#canvas").css('background-color', globalran);
+    // $("#canvas").css('background-color', globalran);
     $("#dot").css('background-color', globalran);
 }
 // function color2(){
@@ -175,6 +200,7 @@ function checkCollisions2() {
         beep.play();
         $("#circle").css('box-shadow', '1px 1px 100px 10px '+globalran+'');
         $("#flashlight").css('background-color', ''+globalran+'');
+        $("#flashlightOverlay").css('background-color', ''+globalran+'');
         matchy();
         newElement.css('left',Math.floor((Math.random() * 950) + 30));
         newElement.css('top',Math.floor((Math.random() * 480) + 30));
@@ -192,6 +218,37 @@ function getPositions2(newElement) {
     var width = $(newElement).width();
     var height = $(newElement).height();
     return [[pos.left, pos.left + width], [pos.top, pos.top + height]];  //Grabs perimeter
+}
+
+
+
+
+
+function checkFlashCollision(){
+    var sphere = $("#dot")[0];
+    var pos = getPositionsFlash(sphere);
+    var circle2 = $("#flashlight")[0];
+    var pos2 = getPositionsFlash(circle2);
+    var horizontalMatch = comparePositionsFlash(pos[0], pos2[0]);
+    var verticalMatch = comparePositionsFlash(pos[1], pos2[1]);
+    var match = horizontalMatch && verticalMatch;
+    if (match){  //Once dot is touched...
+        $("#dot").css('z-index', 11);
+        }
+
+}
+
+function getPositionsFlash(sphere) {
+    var $sphere = $(sphere);
+    var pos = $sphere.position();
+    var width = $sphere.width();
+    var height = $sphere.height();
+    return [[pos.left, pos.left + width], [pos.top, pos.top + height]];  //Grabs perimeter
+}
+function comparePositionsFlash(p1, p2) {
+    var x1 = p1[0] < p2[0] ? p1 : p2;
+    var x2 = p1[0] < p2[0] ? p2 : p1;
+    return !!(x1[1] > x2[0] || x1[0] === x2[0]);  //The IDE wanted me to simplify it so OK
 }
 
 

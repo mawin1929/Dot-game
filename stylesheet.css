@@ -72,7 +72,7 @@ html, body {
 }
 #canvas{
     /*background: radial-gradient(#67655e, rgb(0, 0, 0));*/
-    background-color: #4c4f4d;
+    background-color: #131413;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -91,24 +91,12 @@ html, body {
 #text{
     position: absolute;
     font: 100px Tahoma, Helvetica, Arial, Sans-Serif;
-    left: 40%;
+    left: 39%;
     z-index:100;
     top: 185px;
     width:200px; height:200px;
     color: #f9ee90;
     pointer-events:none;
-    text-shadow: 0 1px 0 #565656,
-    0 2px 0 #4c4f4d,
-    0 3px 0 #babb4a,
-    0 4px 0 #b6b92e,
-    0 5px 0 #a9aa39,
-    0 6px 1px rgba(0,0,0,.1),
-    0 0 5px rgba(0,0,0,.1),
-    0 1px 3px rgba(0,0,0,.3),
-    0 3px 5px rgba(0,0,0,.2),
-    0 5px 10px rgba(0,0,0,.25),
-    0 10px 10px rgba(0,0,0,.2),
-    0 20px 20px rgba(0,0,0,.15);
     -webkit-animation: blur 2s, fadein 4s; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: blur 2s, fadein 4s; /* Firefox < 16 */
     -o-animation: blur 2s, fadein 4s; /* Opera < 12.1 */
@@ -176,14 +164,16 @@ html, body {
     position: absolute;
     margin: 5px;
     pointer-events: none;
-    z-index:2;
-    /*background: radial-gradient(circle at 50% 0px, #ececec, rgba(255, 255, 255, 0) 58%);*/
+    z-index:-1;
+    background: radial-gradient(circle at 50% 0px, #ececec, rgba(255, 255, 255, 0) 58%);
     -webkit-animation: bubble-anim 2s ease-out infinite;
     animation: bubble-anim 2s ease-out infinite;
 
-}
 
+
+}
 @-webkit-keyframes bubble-anim {
+
     0% {
         -webkit-transform: scale(1);
         transform: scale(1); }
@@ -206,7 +196,7 @@ html, body {
 
     97%, 100% {
         -webkit-transform: scale(1);
-        transform: scale(1); } }
+        transform: scale(1);   } }
 @keyframes bubble-anim {
     0% {
         -webkit-transform: scale(1);
@@ -230,7 +220,8 @@ html, body {
 
     97%, 100% {
         -webkit-transform: scale(1);
-        transform: scale(1); }}
+        transform: scale(1);}
+}
 
 
 #circle{
@@ -264,13 +255,14 @@ html, body {
         transform: scale(1.07);}
 
     60% {
-        -webkit-transform: scale(0.96);
-        transform: scale(0.96);}
+        -webkit-transform: scale(0.90);
+        transform: scale(0.90);}
 
 
     97%, 100% {
-        -webkit-transform: scale(1);
-        transform: scale(1); }
+        -webkit-transform: scale(0.95);
+        transform: scale(0.95);
+    }
 }
 @keyframes my-anim {
     0% {
@@ -278,19 +270,29 @@ html, body {
         transform: scale(1); }
 
     20% {
-        -webkit-transform: scale(1.07);
-        -ms-transform: scale(1.07);
-        transform: scale(1.07);}
+        -webkit-transform: scale(0.98);
+        -ms-transform: scale(0.98);
+        transform: scale(0.98);}
+
+    40% {
+        -webkit-transform: scale(0.97);
+        -ms-transform: scale(0.97);
+        transform: scale(0.97);}
 
     60% {
-        -webkit-transform: scale(0.96);
-        transform: scale(0.96);}
+        -webkit-transform: scale(0.99);
+        transform: scale(0.99);}
 
-    97%, 100% {
-        -webkit-transform: scale(1);
-        transform: scale(1); }}
+    80% {
+        -webkit-transform: scale(1.02);
+        transform: scale(1.02);}
 
 
+    100% {
+        -webkit-transform: scale(1.01);
+        transform: scale(1.01);
+    }
+}
 
 #circle:before {
     content: "";
@@ -304,11 +306,41 @@ html, body {
     filter: blur(5px);
 }
 
+#shadow:before{
+    content: "";
+    position: absolute;
+    top: 1%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 0px, #e6e6e6, rgba(255, 255, 255, 0) 58%);
+    filter: blur(5px);
+}
+
 #flashlight {
+    pointer-events: none;
+    opacity: 0.6;
+    position: absolute;
+    z-index: 1;
+    left: 38.4%;  /*higher percentage goes to the right*/
+    top: 24.5%; /*higher percentage goes to the bottom*/
+    height: 270px;
+    width: 270px;
+    border-radius: 150px;
+    background-image: url("flashlight.jpg");
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-color: #ffef73;
+    /*box-shadow: 1px 1px 100px #ffef73;*/
+    -webkit-animation: my-anim 6s  ease-out infinite;
+    animation: my-anim 6s  ease-out infinite;
+}
+
+#flashlightOverlay {
     pointer-events:none;
     opacity: 0.6;
     position:absolute;
-    z-index:1;
     left:37.5%;
     top: 130px;
     height:300px;
@@ -316,6 +348,9 @@ html, body {
     border-radius:150px;
     background-color:#ffef73;
     box-shadow:1px 1px 100px #ffef73;
+    z-index:9;
+    -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+    animation: sk-scaleout 1.0s infinite ease-in-out;
 }
 
 
